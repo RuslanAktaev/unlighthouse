@@ -118,9 +118,11 @@ export const runLighthouseTask: PuppeteerTask = async (props) => {
         await page.setCookie(...resolvedConfig.cookies)
       if (resolvedConfig.extraHeaders)
         await page.setExtraHTTPHeaders(resolvedConfig.extraHeaders)
-      await hooks.callHook('puppeteer:before-goto', page)
     }
   })
+
+  // Call puppeteer:before-goto before Lighthouse open url
+  await hooks.callHook('puppeteer:before-goto', page)
 
   // allow changing behavior of the page
   const clonedRouteReport = { ...routeReport }
