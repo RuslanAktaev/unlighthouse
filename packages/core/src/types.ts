@@ -699,6 +699,11 @@ export interface UnlighthouseHooks {
    * @param page
    */
   'puppeteer:before-goto': (page: Page) => HookResult
+  /**
+   * After puppeteer-cluster has been launched. Useful for running
+   * @param page
+   */
+  'puppeteer-cluster:launched': (page: Page) => HookResult
 }
 
 /**

@@ -30,6 +30,8 @@ export async function createUnlighthouseWorker(tasks: Record<UnlighthouseTask, T
   const logger = useLogger()
   const cluster = await launchPuppeteerCluster()
 
+  console.log('const cluster = await launchPuppeteerCluster()')
+
   const routeReports = new Map<string, UnlighthouseRouteReport>()
   const ignoredRoutes = new Set<string>()
 
@@ -199,7 +201,7 @@ export async function createUnlighthouseWorker(tasks: Record<UnlighthouseTask, T
     }, 3500)
   }
 
-  const hasStarted = () => cluster.workers.length || cluster.workersStarting
+  const hasStarted = () => cluster.workers.length > 1 || cluster.workersStarting
 
   const reports = () => [...routeReports.values()]
 

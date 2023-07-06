@@ -136,6 +136,8 @@ export async function createUnlighthouse(userConfig: UserConfig, provider?: Prov
 
   const worker = await createUnlighthouseWorker(tasks)
 
+  console.log('const worker = await createUnlighthouseWorker(tasks)')
+
   ctx.worker = worker
 
   ctx.setCiContext = async () => {
@@ -248,6 +250,7 @@ export async function createUnlighthouse(userConfig: UserConfig, provider?: Prov
   }
 
   ctx.start = async () => {
+    console.log('worker.hasStarted()', worker.hasStarted());
     if (worker.hasStarted()) {
       logger.debug('Attempted to start Unlighthouse, has already started.')
       return ctx
@@ -273,6 +276,7 @@ export async function createUnlighthouse(userConfig: UserConfig, provider?: Prov
         ctx.provider.mockRouter = createMockRouter(ctx.routeDefinitions)
       logger.debug(`Discovered ${ctx.routeDefinitions?.length} definitions and setup mock router.`)
     }
+
 
     ctx.routes = await resolveReportableRoutes()
     await createBroadcastingEvents()
